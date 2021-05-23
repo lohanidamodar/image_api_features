@@ -1,17 +1,20 @@
 import 'dart:io';
+
 import 'package:appwrite/appwrite.dart';
-import 'package:fast_color_picker/fast_color_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import 'color_picker/color_picker.dart';
+
 // const String fileId = "606ebaf44b314";
-const String fileId = "606ec6f150dc6";
-final String endPoint = kIsWeb
+const String fileId = "60795941596bd";
+final String endPoint =  kIsWeb
     ? "https://localhost/v1"
     : Platform.isLinux
         ? "https://localhost/v1"
-        : "https://10.0.2.2/v1";
-const String project = "606eba7792442";
+        : "https://10.0.2.2/v1"
+    ;
+const String project = "6079592215d4e";
 
 void main() {
   runApp(MyApp());
@@ -42,7 +45,7 @@ class _HomePageState extends State<HomePage> {
   Color backgroundColor = Colors.white;
   double opacity = 1;
   Client client = Client();
-  Storage storage;
+  late Storage storage;
 
   @override
   void initState() {
@@ -63,19 +66,17 @@ class _HomePageState extends State<HomePage> {
       ),
       body: ListView(
         children: [
-          FutureBuilder(
+          FutureBuilder<Response>(
             future: storage.getFilePreview(
               fileId: fileId,
               width: 600,
               borderWidth: borderWidth.toInt(),
-              borderColor: borderColor != null
-                  ? "${borderColor.value.toRadixString(16).substring(2)}"
-                  : null,
+              borderColor:
+                  "${borderColor.value.toRadixString(16).substring(2)}",
               borderRadius: borderRadius.toInt(),
               opacity: opacity,
-              background: backgroundColor != null
-                  ? "${backgroundColor.value.toRadixString(16).substring(2)}"
-                  : null,
+              background:
+                  "${backgroundColor.value.toRadixString(16).substring(2)}",
               output: 'png',
             ),
             builder: (context, snapshot) {
@@ -83,7 +84,7 @@ class _HomePageState extends State<HomePage> {
                 return Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Image.memory(
-                    snapshot.data.data,
+                    snapshot.data?.data,
                     fit: BoxFit.contain,
                   ),
                 );
