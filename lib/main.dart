@@ -8,12 +8,11 @@ import 'color_picker/color_picker.dart';
 
 // const String fileId = "606ebaf44b314";
 const String fileId = "60795941596bd";
-final String endPoint =  kIsWeb
+final String endPoint = kIsWeb
     ? "https://localhost/v1"
     : Platform.isLinux
         ? "https://localhost/v1"
-        : "https://10.0.2.2/v1"
-    ;
+        : "https://10.0.2.2/v1";
 const String project = "6079592215d4e";
 
 void main() {
@@ -80,6 +79,9 @@ class _HomePageState extends State<HomePage> {
               output: 'png',
             ),
             builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                print(snapshot.error);
+              }
               if (snapshot.hasData)
                 return Padding(
                   padding: const EdgeInsets.all(16.0),
