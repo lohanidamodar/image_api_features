@@ -1,12 +1,9 @@
 import 'dart:io';
-
 import 'package:appwrite/appwrite.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
 import 'color_picker/color_picker.dart';
 
-// const String fileId = "606ebaf44b314";
 const String fileId = "60795941596bd";
 final String endPoint = kIsWeb
     ? "https://localhost/v1"
